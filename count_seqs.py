@@ -15,7 +15,7 @@ def count_seqs(input_file, read_max_lines=None, top_hits=25, length=None):
     total_counts = 0
     with open(input_file, 'r') as f:
         sys.stderr.write("Reading input file \"{}\"...\n\n".format(input_file))
-        seq_counts = collections.Counter( islice(f, first_headerline+1, read_max_lines, 4)[:length] )
+        seq_counts = collections.Counter( (x[:length] for x in islice(f, first_headerline+1, read_max_lines, 4)) )
         total_counts = reduce( lambda x,y: x+y, seq_counts.values() )
         #for seq in islice(f, first_headerline, max_lines, 4):
         #    lengths_dict[ seq ] += 1
